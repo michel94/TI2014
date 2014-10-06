@@ -17,4 +17,4 @@ d = 1 / (2^quant);
 alf = -1:d:1;
 r = roundToNearest(wav, alf);
 createHist(r, alf);
-entropia(r, alf);
+entropia(r, alf)
