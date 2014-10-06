@@ -1,6 +1,6 @@
 function count = createHist(P, A)
-    % Mostra e devolve o histograma de ocorr?ncia dos s?mbolos
-    % do alfabeto A na fonte de informa??o P
+    % Mostra e devolve o histograma de ocorrencia dos simbolos
+    % do alfabeto A na fonte de informacao P
     
     count = hist(P, A);
 

@@ -1,4 +1,7 @@
 function ent = entropia(P, A)
+    % Calcula a entropia, ou seja, o número
+    % médio de bits mínimo na codificação de P
+
     ent = 0;
     P = P(:);
     %P = roundToNearest(P, A);
