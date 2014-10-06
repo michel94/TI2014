@@ -1,10 +1,9 @@
 function ent = entropia(P, A)
-    % Calcula a entropia, ou seja, o número
-    % médio de bits mínimo na codificação de P
+    % Calcula a entropia, ou seja, o numero
+    % medio de bits minimo na codificao de P
 
     ent = 0;
     P = P(:);
-    %P = roundToNearest(P, A);
     total = sum(length(P)); 
     
     for i=1:length(A)
@@ -14,6 +13,6 @@ function ent = entropia(P, A)
           ent = ent + prob * log2(prob);
        end
     end
+
     ent = -ent;
-    
 end
