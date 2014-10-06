@@ -1,8 +1,8 @@
 function v = bs(v, L, s, e)
     m = floor((e - s) / 2 + s);
-    fprintf('s: %d e: %d\n', s, e);
+    %fprintf('s: %d e: %d\n', s, e);
     if v < L(1) | v > L(length(L))
-        return
+        return;
     end
     if e - s <= 1
         if s < length(L)

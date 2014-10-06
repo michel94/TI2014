@@ -1,8 +1,8 @@
 function ent = entropia(P, A)
     ent = 0;
     P = P(:);
-    P = roundToNearest(P, A);
-    total = sum(length(P));
+    %P = roundToNearest(P, A);
+    total = sum(length(P)); 
     
     for i=1:length(A)
        f = sum(P == A(i));
