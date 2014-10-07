@@ -1,29 +1,32 @@
-function v = bs(v, L, s, e)
-    m = floor((e - s) / 2 + s);
+function value = bs(value, L, low, high)
+    % Efetua pesquisa bin?ria do valor 'v' no vetor 'L'
+    % entre 'low' e 'high'
 
-    if v < L(1) || v > L(length(L))
+    m = floor((high - low) / 2 + low);
+
+    if value < L(1) || value > L(length(L))
         return;
     end
 
-    if e - s <= 1
-        if s < length(L)
-            if abs(L(s+1) - v) < abs(L(s) - v)
-                v = L(s+1);
+    if high - low <= 1
+        if low < length(L)
+            if abs(L(low + 1) - value) < abs(L(low) - value)
+                value = L(low+1);
             else
-                v = L(s);
+                value = L(low);
             end
         else
-            v = L(s);
+            value = L(low);
         end
 
         return;
     end
 
-    if v > L(m)
-        v = bs(v, L, m, e);
+    if value > L(m)
+        value = bs(value, L, m, high);
         return;
-    elseif v < L(m)
-        v = bs(v, L, s, m);
+    elseif value < L(m)
+        value = bs(value, L, low, m);
         return;
     end
 end
