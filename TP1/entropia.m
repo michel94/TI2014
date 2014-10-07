@@ -1,10 +1,11 @@
 function ent = entropia(P, A)
     % Calcula a entropia, ou seja, o numero
-    % medio de bits minimo na codificao de P
+    % medio de bits minimo para os simbolos de A
+    % na codificao da fonte de informacao P
 
     ent = 0;
     P = P(:);
-    total = sum(length(P)); 
+    total = sum(length(P));
 
     for i=1:length(A)
        f = sum(P == A(i));
