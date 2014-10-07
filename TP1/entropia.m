@@ -5,7 +5,7 @@ function ent = entropia(P, A)
     ent = 0;
     P = P(:);
     total = sum(length(P)); 
-    
+
     for i=1:length(A)
        f = sum(P == A(i));
        if f > 0
