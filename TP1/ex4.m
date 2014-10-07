@@ -2,14 +2,17 @@
 im = imread('dados/kid.bmp');
 c = hist(im, 1:255);
 hufflen(c)
+
 % 2
 im = imread('dados/homer.bmp');
 c = hist(im, 1:255);
 hufflen(c)
+
 % 3
 im = imread('dados/homerBin.bmp');
 c = hist(im, [0 255]);
 hufflen(c)
+
 % 4
 wav = audioread('dados/guitarSolo.wav');
 quant = 7;

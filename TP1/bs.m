@@ -1,9 +1,10 @@
 function v = bs(v, L, s, e)
     m = floor((e - s) / 2 + s);
-    %fprintf('s: %d e: %d\n', s, e);
-    if v < L(1) | v > L(length(L))
+
+    if v < L(1) || v > L(length(L))
         return;
     end
+
     if e - s <= 1
         if s < length(L)
             if abs(L(s+1) - v) < abs(L(s) - v)
@@ -14,8 +15,10 @@ function v = bs(v, L, s, e)
         else
             v = L(s);
         end
+
         return;
     end
+
     if v > L(m)
         v = bs(v, L, m, e);
         return;
@@ -23,5 +26,4 @@ function v = bs(v, L, s, e)
         v = bs(v, L, s, m);
         return;
     end
-
 end
