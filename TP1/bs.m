@@ -1,5 +1,5 @@
 function value = bs(value, L, low, high)
-    % Efetua pesquisa bin?ria do valor 'v' no vetor 'L'
+    % Efetua pesquisa binaria do valor 'v' no vetor 'L'
     % entre 'low' e 'high'
 
     m = floor((high - low) / 2 + low);
