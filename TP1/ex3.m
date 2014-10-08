@@ -24,7 +24,6 @@ disp(entropia(r, alf));
 
 % 5
 englishAlphabet = ['a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'w' 'x' 'y' 'z' ];
-
 textFile = fopen('dados/english.txt');
 text = fscanf(textFile, '%s');
 createHist(text, englishAlphabet);
