@@ -1,6 +1,6 @@
 function count = hist(P, A)
-    % Conta o número de ocorrências em P
-    % dos símbolos do alfabeto A
+    % Conta o numero de ocorrencias em P
+    % dos simbolos do alfabeto A
 
     
     s = size(A);
@@ -25,5 +25,4 @@ function count = hist(P, A)
         %fprintf('%d, %d: %d\n', A(i), A(i+1), count(i));
        
     end
-    
 end
