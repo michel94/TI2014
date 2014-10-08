@@ -27,8 +27,6 @@ function ent = entropia(P, A)
             prob = f/total;
             ent = ent + prob * log2(prob);
         end
-        
-        %fprintf('%d, %d: %d\n', A(i), A(i+1), count(i));
     end
     
     ent = -ent;
