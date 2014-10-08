@@ -25,3 +25,11 @@ alf = -1:d:1;
 r = roundToNearest(wav, alf);
 c = hist(r, alf);
 hufflen(c)
+
+% 5
+englishAlphabet = 'a':'z';
+textFile = fopen('dados/english.txt');
+text = fscanf(textFile, '%s');
+fclose(textFile);
+text = text(:);
+% TODO finish this shit

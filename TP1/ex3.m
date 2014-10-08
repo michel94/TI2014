@@ -30,6 +30,7 @@ disp(entropia(r, alf));
 englishAlphabet = 'a':'z';
 textFile = fopen('dados/english.txt');
 text = fscanf(textFile, '%s');
+fclose(textFile);
 text = text(:);
 createHist(text, englishAlphabet);
 disp(entropia(text, englishAlphabet));
