@@ -1,6 +1,6 @@
-function value = bs(value, L, low, high)
-    % Efetua pesquisa binaria do valor 'v' no vetor 'L'
-    % entre 'low' e 'high'
+function value = binarySearch(value, L, low, high)
+    % Efetua pesquisa binaria pelo valor 'v' no vetor 'L'
+    % entre 'low' e 'high'.
 
     m = floor((high - low) / 2 + low);
 
@@ -23,10 +23,10 @@ function value = bs(value, L, low, high)
     end
 
     if value > L(m)
-        value = bs(value, L, m, high);
+        value = binarySearch(value, L, m, high);
         return;
     elseif value < L(m)
-        value = bs(value, L, low, m);
+        value = binarySearch(value, L, low, m);
         return;
     end
 end
