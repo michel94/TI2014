@@ -22,7 +22,7 @@ wav = wav(:);
 quant = 7;
 d = 1 / (2^quant);
 alf = -1:d:1;
-r = roundToNearest(wav, alf);
+%r = roundToNearest(wav, alf);
 c = hist(r, alf);
 disp(hufflen(c));
 
