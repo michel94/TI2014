@@ -2,19 +2,19 @@
 im = imread('dados/kid.bmp');
 im = im(:);
 c = hist(im, 1:255);
-hufflen(c)
+disp(hufflen(c));
 
 % 2
 im = imread('dados/homer.bmp');
 im = im(:);
 c = hist(im, 1:255);
-hufflen(c)
+disp(hufflen(c));
 
 % 3
 im = imread('dados/homerBin.bmp');
 im = im(:);
 c = hist(im, [0 255]);
-hufflen(c)
+disp(hufflen(c));
 
 % 4
 wav = audioread('dados/guitarSolo.wav');
@@ -24,7 +24,7 @@ d = 1 / (2^quant);
 alf = -1:d:1;
 r = roundToNearest(wav, alf);
 c = hist(r, alf);
-hufflen(c)
+disp(hufflen(c));
 
 % 5
 englishAlphabet = ['a':'z' 'A':'Z'];
@@ -33,4 +33,4 @@ text = fscanf(textFile, '%s');
 fclose(textFile);
 text = text(:);
 c = hist(text, englishAlphabet);
-hufflen(c);
+disp(hufflen(c));
