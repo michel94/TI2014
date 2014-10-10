@@ -1,13 +1,13 @@
 % 1
 im = imread('dados/kid.bmp');
 im = im(:);
-c = hist(im, 1:255);
+c = hist(im, 0:255);
 disp(hufflen(c));
 
 % 2
 im = imread('dados/homer.bmp');
 im = im(:);
-c = hist(im, 1:255);
+c = hist(im, 0:255);
 disp(hufflen(c));
 
 % 3
@@ -22,7 +22,7 @@ wav = wav(:);
 quant = 7;
 d = 1 / (2^quant);
 alf = -1:d:1;
-%r = roundToNearest(wav, alf);
+r = roundToNearest(wav, alf);
 c = hist(r, alf);
 disp(hufflen(c));
 
