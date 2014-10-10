@@ -14,9 +14,10 @@ function ent = entropia(P, A)
     total = size(P);
     total = total(1);
 
-    for i=1:1:s(1)
-        x = A(i,:);
-        if(s(2) > 1)
+    for i=1:s(1)
+        x = A(i, :);
+
+        if (s(2) > 1)
             [~, t] = ismember(P, x, 'rows');
             f = sum(t);
         else
@@ -24,7 +25,7 @@ function ent = entropia(P, A)
         end
 
         if f > 0
-            prob = f/total;
+            prob = f / total;
             ent = ent + prob * log2(prob);
         end
     end
