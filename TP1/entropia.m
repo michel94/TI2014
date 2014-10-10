@@ -7,9 +7,9 @@ function ent = entropia(P, A)
 
     if (s(1) == 1)
         A = transpose(A);
+        s = size(A);
     end
 
-    s = size(A);
     ent = 0;
     total = size(P);
     total = total(1);
