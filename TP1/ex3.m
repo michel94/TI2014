@@ -22,7 +22,7 @@ wav = wav(:);
 quant = 7;
 d = 1 / (2^quant);
 alf = -1:d:1;
-r = roundToNearest(wav, alf);
+r = wav; %r = roundToNearest(wav, alf);
 createHist(r, alf);
 disp(entropia(r, alf));
 
