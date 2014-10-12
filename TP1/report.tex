@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{parskip}
+\setlength{\parskip}{1.0\baselineskip plus2pt minus2pt}
+
+\title{Entropia, Redundância e Informação Mútua}
+\author{David Gomes, Guilherme Graça, Miguel Duarte}
+\date{Outubro 2014}
+
+\begin{document}
+\maketitle
+  As funções \texttt{hist} e \texttt{createHist} do primeiro exercício, embora bastante
+  simples acabam por ser importantes para a visualização de dados ao longo
+  de todo o projeto. Assim sendo, segue a análise ao código das mesmas.
+
+  A função \texttt{hist} devolve a matriz \texttt{count} que contém as ocorrências
+  de cada símbolo do alfabeto \texttt{A} na fonte de informação \texttt{P}. Assim,
+  esta função é chamada pela função \texttt{createHist} de forma a apresentar um histograma
+  com recurso à função \texttt{bar} do Matlab:
+
+  \vspace{2mm}
+  \begin{lstlisting}[language=Matlab]
+  function count = createHist(P, A)
+    count = hist(P, A);
+
+    waitfor(bar(count));
+  end
+  \end{lstlisting}
+
+  No ficheiro \texttt{entropia.m} encontra-se a função que calcula a entropia de acordo
+  com o exercício 2 do trabalho prático. A fórmula da entropia é a seguinte:
+
+  $$
+    H(X) = \sum_{i=1}^{n}{-P(X_i) \times log_2 P(X_i)}
+  $$
+
+  No terceiro exercício recorremos às funções previamente definidas para determinar
+  a entropia e a distribuição estatística em diferentes fontes de informação.
+  Começemos por observar as diferentes distribuições estatísticas.
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=0.75\textwidth]{ex3kid}
+    \caption{Distribuição Estatística de kid.bmp}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=0.75\textwidth]{ex3homer}
+    \caption{Distribuição Estatística de homer.bmp}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=0.75\textwidth]{ex3homerbin}
+    \caption{Distribuição Estatística de homerBin.bmp}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=0.75\textwidth]{ex3guitarsolo}
+    \caption{Distribuição Estatística de guitarSolo.wav}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=0.75\textwidth]{ex3english}
+    \caption{Distribuição Estatística de english.txt}
+  \end{figure}
+
+  Diferentes fontes de informação implicam diferentes alfabetos. Assim, usamos
+  \texttt{0:255} no \texttt{kid.bmp} e no \texttt{homer.bmp}. No \texttt{homerBin.bmp},
+  usamos \texttt{[0 255]} visto que as únicas duas cores presentes na imagem
+  são o branco e o preto. No caso do \texttt{guitarSolo.wav}, calculamos o alfabeto
+  \texttt{alf} da seguinte maneira:
+
+  \vspace{2mm}
+  \begin{lstlisting}[language=Matlab]
+    quant = 7;
+    d = 1 / (2^quant);
+    alf = -1:d:1;
+  \end{lstlisting}
+
+  Finalmente, o alfabeto usado na fonte \texttt{english.txt} é simplesmente
+  \texttt{['a':'z' 'A':'Z']}.
+
+  Apresentamos agora os valores de entropia obtidos:
+
+  \begin{tabular}{ l c r }
+    kid.bmp & 6.9541 \\
+    homer.bmp & 3.4659 \\
+    homerBin.bmp & 0.6448 \\
+    guitarSolo.wav & 7.3580 \\
+    english.txt & 4.1943 \\
+  \end{tabular}
+
+  No exercício 4, calculamos o número médio de bits por codificação Huffman:
+
+  \begin{tabular}{ l c r }
+    kid.bmp & 6.9832 \\
+    homer.bmp & 3.5483 \\
+    homerBin.bmp & 1 \\
+    guitarSolo.wav & 7.3791 \\
+    english.txt & 4.2518 \\
+  \end{tabular}
+
+\end{document}
