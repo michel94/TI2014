@@ -10,14 +10,16 @@ function count = hist(P, A)
     end
 
     count = zeros(1, s(1));
+    
+	alf = intersect(unique(P, 'rows'), A, 'rows');
+	h = size(alf);
+	h = h(1);
 
-    for i=1:s(1)
-        x = A(i, :);
+    for i=1:h
+        x = alf(i, :);
 
         if (s(2) > 1)
-            [~, t] = ismember(P, x, 'rows');
-            f = sum(t);
-            count(i) = f;
+            count(i) = sum(all(bsxfun(@eq, x, P),2));
         else
             count(i) = length(find(P == x));
         end

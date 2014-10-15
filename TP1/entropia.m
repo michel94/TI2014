@@ -17,12 +17,14 @@ function ent = entropia(P, A)
     h = size(alf);
     h = h(1);
 
+    
     for i=1:h
         x = alf(i, :);
 
         if (s(2) > 1)
             %[~, t] = ismember(P, x, 'rows');
             %f = sum(t);
+            
             f = sum(all(bsxfun(@eq, x, P),2)); %sum(ismember(P, x,'rows')); 
         else
             f = length(find(P == x));
