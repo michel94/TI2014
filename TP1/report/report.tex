@@ -1,12 +1,18 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{geometry}
 
 \usepackage{parskip}
 \setlength{\parskip}{1.0\baselineskip plus2pt minus2pt}
+
+\addtolength{\topmargin}{-50pt}
+\addtolength{\textheight}{130pt}
+\addtolength{\textwidth}{95pt}
+\addtolength{\oddsidemargin}{-45pt}
 
 \title{Entropia, Redundância e Informação Mútua}
 \author{David Gomes, Guilherme Graça, Miguel Duarte}
@@ -87,7 +93,8 @@
   \end{lstlisting}
 
   Finalmente, o alfabeto usado na fonte \texttt{english.txt} é simplesmente
-  \texttt{['a':'z' 'A':'Z']}.
+  \texttt{['a':'z' 'A':'Z']}. Na figura 5, a primeira metade (\texttt{0:26})
+  refere-se às letras mínusculas (\texttt{'a':'z'}), daí a maior densidade.
 
   Apresentamos agora os valores de entropia, ou seja, o número médio mínimo
   de bits para representar cada símbolo de um dado alfabeto associado a uma
@@ -103,7 +110,8 @@
 
   \pagebreak
 
-  No exercício 4, calculamos o número médio de bits por codificação Huffman:
+  No exercício 4, calculamos o número médio de bits por codificação
+  \textit{Huffman}:
 
   \begin{tabular}{ l c r }
     kid.bmp & 6.9832 \\
@@ -113,4 +121,16 @@
     english.txt & 4.2518 \\
   \end{tabular}
 
+  No exercício 5, calculamos o número médio de bits por símbolo (entropia)
+  aplicando \textit{agrupamento de símbolos}. Por outras palavras, admitindo
+  que cada símbolo é na verdade uma sequência de dois símbolos contíguos:
+
+  \begin{tabular}{ l c r }
+    kid.bmp & 4.9201 \\
+    homer.bmp & 2.4198 \\
+    homerBin.bmp & 0.3907 \\
+    guitarSolo.wav & -- \\
+    english.txt & 3.5713 \\
+  \end{tabular}
+  
 \end{document}
