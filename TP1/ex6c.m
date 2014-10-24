@@ -1,3 +1,5 @@
+
+
 r = zeros(7, 2);
 
 for i=1:7
@@ -8,5 +10,6 @@ end
 sortrows(r, -1);
 
 for i=1:7
+    disp(r(i, 1));
     disp(sprintf('Song0%d.wav', r(i, 2)) );
 end
