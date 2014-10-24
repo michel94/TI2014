@@ -15,11 +15,14 @@
 \addtolength{\oddsidemargin}{-45pt}
 
 \title{Entropia, Redundância e Informação Mútua}
+\title{Teoria da Informação - Universidade de Coimbra}
 \author{David Gomes, Guilherme Graça, Miguel Duarte}
 \date{Outubro 2014}
 
 \begin{document}
 \maketitle
+
+\section{Exercícios 1 e 2}
   As funções \texttt{hist} e \texttt{createHist} do primeiro exercício, embora bastante
   simples acabam por ser importantes para a visualização de dados ao longo
   de todo o projeto. Assim sendo, segue a análise ao código das mesmas.
@@ -39,12 +42,13 @@
   \end{lstlisting}
 
   No ficheiro \texttt{entropia.m} encontra-se a função que calcula a entropia de acordo
-  com o exercício 2 do trabalho prático. A fórmula da entropia é a seguinte:
+  com o exercício 2 do trabalho prático. A fórmula da entropia utlizada é a seguinte:
 
   $$
     H(X) = \sum_{i=1}^{n}{-P(X_i) \times log_2 P(X_i)}
   $$
 
+\section{Exercício 3}
   No terceiro exercício recorremos às funções previamente definidas para determinar
   a entropia e a distribuição estatística em diferentes fontes de informação.
   Comecemos por observar as diferentes distribuições estatísticas.
@@ -94,13 +98,7 @@
 
   Finalmente, o alfabeto usado na fonte \texttt{english.txt} é simplesmente
   \texttt{['a':'z' 'A':'Z']}. Na figura 5, a primeira metade (\texttt{0:26})
-  refere-se às letras mínusculas (\texttt{'a':'z'}), daí a maior densidade.
-
-  Em relação a estas fontes, é colocada a questão - \textit{Sera possível
-  comprimir cada uma das fontes de forma não destrutiva?}. Por um lado, a entropia
-  está definida como o limite mínimo teórico blah blah blah .... Por outro lado, ...
-
-  % WTF NAO SEI
+  refere-se às letras mínusculas (\texttt{'a':'z'}), daí a maior frequência de ocorrências destas, especialmente de algumas letras mais comuns.
 
   Apresentamos agora os valores de entropia, ou seja, o número médio mínimo
   de bits para representar cada símbolo de um dado alfabeto associado a uma
@@ -114,9 +112,12 @@
     english.txt & 4.1943 \\
   \end{tabular}
 
+  Em relação a estas fontes, é colocada a questão - \textit{Sera possível
+  comprimir cada uma das fontes de forma não destrutiva?}. Naturalmente, é possível comprimir cada uma das fontes de forma não destrutiva, e máxima compressão possível de alcançar é dada pela entropia calculada, pois é o limite mínimo de número médio de bits por símbolo.
+
   \pagebreak
 
-  No exercício 4, calculamos o número médio de bits por codificação
+  No exercício 4, calculámos o número médio de bits por símbolo:
   \textit{Huffman}:
 
   \begin{tabular}{ l c r }
@@ -127,11 +128,11 @@
     english.txt & 4.2518 \\
   \end{tabular}
 
-  Aqui coloca-se a questão - \textit{Será possível reduzir-se a variância?} -
-  ao que respondemos que sim, se colocarmos os símbolos combinados na ordem
-  mais elevada possível. Esta técnica é útil no caso de ...
 
-  % WTF ^^^eu fui buscar isso a um relatorio do ano passado
+Obteve-se, no geral, valores relativamente próximos da entropia, como seria de esperar. Tal não se nota no homerBin, pois não há outra possibilidade senão usar um bit para o branco e outro para o preto.
+Reparamos também que há uma grande diferença no comprimento dos códigos encontrados para cada exemplo, o que é natural, pois espera-se códigos menores para os símbolos mais comuns e maiores para os símbolos menos comuns.
+
+\section{Exercício 5}
 
   No exercício 5, calculamos o número médio de bits por símbolo (entropia)
   aplicando \textit{agrupamento de símbolos}. Por outras palavras, admitindo
@@ -187,6 +188,13 @@
   O \textit{downside} está na complexidade do algoritmo e nos requisitos
   de memória que terão de ser feitos a mais.
 
+Para as imagens, é muito frequente que pixeis consecutivos tenham a mesma cor, enquanto que pixeis consecutivos de cor diferente são muito menos communs. Assim, usando agrupamento de símbolos, consegue-se reduzir a entropia, pois guarda-se os pixeis dois a dois. 
+
+Para o kid.bmp e para o homer.bmp, têm se uma redução na compressão de 13\% e 18\%, respectivamente, relativamente ao obtido sem compressao (8 bits). Para o homerBin a redução é de 
+
+
+\section{Exercício 6}
+
   Finalmente, no exercício 6 vamos recorrer à informação mútua entre duas
   varíaveis de acordo com a seguinte fórmula:
 
@@ -239,6 +247,5 @@
     Song07.wav & 6.313053 \\
   \end{tabular}
 
-  Concluímos assim que o ficheiro \texttt{Song06.wav} é o mais semelhante
-  com o ficheiro \texttt{guitarSolo.wav}.
+  Concluímos assim que o ficheiro \texttt{Song06.wav} é o que têm o trecho mais semelhante com o ficheiro \texttt{guitarSolo.wav}, usando o critério de informação mútua.
 \end{document}
