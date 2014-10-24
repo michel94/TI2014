@@ -1,3 +1,4 @@
+
 function inf = mutualInf(X, Y, alf)
 %MUTUALINF 
 %   
