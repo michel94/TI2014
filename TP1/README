@@ -1,6 +1,17 @@
 Trabalho Prático n.º 1 de Teoria de Informação
 ----------------------------------------------
 
+Os ficheiros principais correspondentes a cada exercício são:
+
+1. createHist.m
+2. entropia.m
+3. ex3.m
+4. ex4.m
+5. ex5.m
+6.a) slidingWindow.m
+6.b) ex6b.m
+6.c) ex6c.m
+
 Trabalho realizado por:
 David Gomes, n.º 2013136061
 Guilherme Graça, n.º 2012138932

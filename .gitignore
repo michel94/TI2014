@@ -5,3 +5,4 @@ TP1/report/*.aux
 TP1/report/*.log
 TP1/report/*.pdf
 TP1/report/*.gz
+*.zip
