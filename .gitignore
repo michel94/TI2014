@@ -1,3 +1,7 @@
 TP1/dados
 .DS_Store
 *~
+TP1/report/*.aux
+TP1/report/*.log
+TP1/report/*.pdf
+TP1/report/*.gz
