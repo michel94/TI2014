@@ -6,6 +6,6 @@ function inf = slidingWindow(query, target, alf, step)
     for i=1:step:s
         inf(ceil(i/step)) = mutualInf(query, target(i: i+length(query)-1), alf);
     end
-    %inf = transpose(inf);
+    inf = transpose(inf);
 
 end

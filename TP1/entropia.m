@@ -25,7 +25,7 @@ function ent = entropia(P, A)
             %[~, t] = ismember(P, x, 'rows');
             %f = sum(t);
             
-            f = sum(all(bsxfun(@eq, x, P),2)); %sum(ismember(P, x,'rows')); 
+            f = sum(all(bsxfun(@eq, x, P),2)); %sum(ismember(P, x,'rows'));
         else
             f = length(find(P == x));
         end
