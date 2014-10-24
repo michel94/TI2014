@@ -1,3 +1,3 @@
-function ent = entropia(c, huf)
+function [ent] = trueEntropy(c, huf)
     ent = sum((c/sum(c)) .* huf);
 end

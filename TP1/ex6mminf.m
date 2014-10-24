@@ -1,4 +1,7 @@
-function mmi = ex6mminf(file)
+function [mmi] = ex6mminf(file)
+    % Calcula a informa??o m?tua m?xima entre ficheiro ?file? e o ficheiro
+    % guitarSolo.wav.
+
     query = audioread('dados/guitarSolo.wav');
     query = query(:);
     quant = 7;
@@ -9,9 +12,7 @@ function mmi = ex6mminf(file)
     wav = audioread(file);
     wav = wav(:);
     wav = wav*2^quant;
-    r = slidingWindow(query, wav, alf, floor(0.25*length(query)) );
-    figure;
-    bar(r);
+    r = slidingWindow(query, wav, alf, floor(0.25 * length(query)));
+    %waitfor(plot(r));
     mmi = max(r);
-    
 end
