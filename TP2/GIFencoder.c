@@ -4,6 +4,7 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "string.h"
+#include <math.h>
 
 // conversão de um objecto do tipo Image numa imagem indexada
 imageStruct* GIFEncoder(unsigned char *data, int width, int height) {
@@ -102,6 +103,17 @@ char numBits(int n) {
 	return nb;
 }
 
+void writeImageBlockHeader(imageStruct* image, FILE* file){
+	fprintf(file, "%c", 2*16 + 12); //0x2c
+	fprintf(file, "00"); //image left position - 2 bytes
+	fprintf(file, "00"); //image top position - 2 bytes
+	fprintf(file, "%s", (short)image->width ); // width - 2 bytes
+	fprintf(file, "%s", (short)image->height ); //height - 2 bytes
+	char lct = 0;
+	fprintf(file, "%c", lct);
+	fprintf(file, "%c", numBits(image->numColors));
+
+}
 
 //---- Função para escrever imagem no formato GIF, versão 87a
 //// COMPLETAR ESTA FUNÇÃO
@@ -117,7 +129,7 @@ void GIFEncoderWrite(imageStruct* image, char* outputFile) {
 	// CRIAR FUN‚ÌO para ESCRITA do IMAGE BLOCK HEADER!!!
 	//Sugest‹o da assinatura do mŽtodo a chamar:
 	//
-	//writeImageBlockHeader(image, file);
+	writeImageBlockHeader(image, file);
 	
 	/////////////////////////////////////////
 	//Escrever blocos com 256 bytes no m‡ximo
@@ -175,4 +187,6 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
 	//Global color table
 	for (i = 0; i < image->numColors * 3; i++)
 		fprintf(file, "%c", image->colors[i]);
+
+
 }

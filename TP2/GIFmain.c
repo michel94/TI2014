@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 	if (argc > 1)
 		inputFile = argv[1];
 	else
-		inputFile = "portugal.png";
+		inputFile = "samples/portugal.png";
 
 	if (argc > 2)
 		outputFile = argv[2];
