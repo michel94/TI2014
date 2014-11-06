@@ -109,10 +109,17 @@ void writeImageBlockHeader(imageStruct* image, FILE* file){
 	fprintf(file, "00"); //image top position - 2 bytes
 	fprintf(file, "%s", (short)image->width ); // width - 2 bytes
 	fprintf(file, "%s", (short)image->height ); //height - 2 bytes
-	char lct = 0;
-	fprintf(file, "%c", lct);
-	fprintf(file, "%c", numBits(image->numColors));
+	
+	//page 12 - GIF.SPEC.PDF
 
+	char lctf = 0 << 7;	// Local Color Table present
+	char iflag = 0 << 6;	// Image interlaced
+	char sflag = 0 << 5;	// Local Color Table sorted
+	//res?
+	char s_lct = 0;		//Size of Local Color Table
+	
+	fprintf(file, "%c", (lctf | iflag | sflag | s_lct) );
+	fprintf(file, "%c", numBits(image->numColors));
 }
 
 //---- Função para escrever imagem no formato GIF, versão 87a
