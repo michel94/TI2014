@@ -107,8 +107,12 @@ void writeImageBlockHeader(imageStruct* image, FILE* file){
 	fprintf(file, "%c", 2*16 + 12); //0x2c
 	fprintf(file, "00"); //image left position - 2 bytes
 	fprintf(file, "00"); //image top position - 2 bytes
-	fprintf(file, "%s", (short)image->width ); // width - 2 bytes
-	fprintf(file, "%s", (short)image->height ); //height - 2 bytes
+	//fprintf(file, "%c", (short)image->width ); // width - 2 bytes
+	fwrite(&image->width, 1, sizeof(char), file);
+	fwrite(&image->width, 2, sizeof(char), file);
+	//fprintf(file, "%c", (short)image->height ); //height - 2 bytes
+	fwrite(&image->height, 1, sizeof(char), file);
+	fwrite(&image->height, 2, sizeof(char), file);
 	
 	//page 12 - GIF.SPEC.PDF
 
@@ -182,11 +186,11 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
 	sz = numBits(image->numColors - 1) - 1; //-1: 0 --> 2^1, 7 --> 2^8
 	toWrite = (char) (GCTF << 7 | colorRes << 4 | SF << 3 | sz);
 	fprintf(file, "%c", toWrite);
-
+	
 	//Background color index
 	bgci = 0;
 	fprintf(file, "%c", bgci);
-
+	
 	//Pixel aspect ratio
 	par = 0; // 0 --> informação sobre aspect ratio não fornecida --> decoder usa valores por omissão
 	fprintf(file, "%c",par);
@@ -194,6 +198,6 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
 	//Global color table
 	for (i = 0; i < image->numColors * 3; i++)
 		fprintf(file, "%c", image->colors[i]);
-
-
+	
+	
 }
