@@ -103,16 +103,25 @@ char numBits(int n) {
 	return nb;
 }
 
+int printBytes(int a, int n, FILE* file){
+	if(n < 0 || n > 4)
+		return 1;
+	
+	int i;
+	for(i=0; i<n; i++){
+		fprintf(file, "%d\n", (a << 24) >> 24);
+		a = a >> 8;
+	}
+	return 0;
+	
+}
+
 void writeImageBlockHeader(imageStruct* image, FILE* file){
 	fprintf(file, "%c", 2*16 + 12); //0x2c
 	fprintf(file, "00"); //image left position - 2 bytes
 	fprintf(file, "00"); //image top position - 2 bytes
-	//fprintf(file, "%c", (short)image->width ); // width - 2 bytes
-	fwrite(&image->width, 1, sizeof(char), file);
-	fwrite(&image->width, 2, sizeof(char), file);
-	//fprintf(file, "%c", (short)image->height ); //height - 2 bytes
-	fwrite(&image->height, 1, sizeof(char), file);
-	fwrite(&image->height, 2, sizeof(char), file);
+	printBytes(image->width, 2, file); // width - 2 bytes
+	printBytes(image->height, 2, file); // width - 2 bytes
 	
 	//page 12 - GIF.SPEC.PDF
 
@@ -198,6 +207,6 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
 	//Global color table
 	for (i = 0; i < image->numColors * 3; i++)
 		fprintf(file, "%c", image->colors[i]);
-	
-	
+
+
 }
