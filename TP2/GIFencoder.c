@@ -207,6 +207,4 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
   //Global color table
   for (i = 0; i < image->numColors * 3; i++)
     fprintf(file, "%c", image->colors[i]);
-
-
 }
