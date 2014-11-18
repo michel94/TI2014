@@ -6,6 +6,10 @@
 #include "string.h"
 #include <math.h>
 
+map<string, int> dict;
+int buff=0, curnbits=0, ncodes=0;
+char towrite[1000000];
+
 // conversão de um objecto do tipo Image numa imagem indexada
 imageStruct* GIFEncoder(unsigned char *data, int width, int height) {
 	
@@ -118,8 +122,8 @@ int printBytes(int a, int n, FILE* file){
 
 void writeImageBlockHeader(imageStruct* image, FILE* file){
 	fprintf(file, "%c", 2*16 + 12); //0x2c
-	fprintf(file, "00"); //image left position - 2 bytes
-	fprintf(file, "00"); //image top position - 2 bytes
+	fprintf(file, "\0\0"); //image left position - 2 bytes
+	fprintf(file, "\0\0"); //image top position - 2 bytes
 	printBytes(image->width, 2, file); // width - 2 bytes
 	printBytes(image->height, 2, file); // width - 2 bytes
 	
@@ -133,6 +137,83 @@ void writeImageBlockHeader(imageStruct* image, FILE* file){
 	
 	fprintf(file, "%c", (lctf | iflag | sflag | s_lct) );
 	fprintf(file, "%c", numBits(image->numColors));
+}
+
+void fillDict(int ncolors){
+	for(int i=0; i<ncolors; i++){
+		string s(1, i);
+		dict[s] = i;
+	}
+	int CLEARCODE = ncolors+1;
+	int ENDOFINF = ncolors+2;
+	dict["00000000000000"] = CLEARCODE;
+	dict["00000000000001"] = ENDOFINF;
+}
+
+bool inDict(string s){
+	return dict.find(s) != dict.end();
+}
+
+void cleanbuffer(){
+	while(curnbits >= 8){
+		towrite[ncodes++] = (char) ((buff << 24) >> 24);
+		curnbits -= 8;
+	}
+	
+}
+
+void writeBits(int n, int nbits){
+	for(int i=0; i<nbits; i++){
+		buff = (buff << 1) | (n % 2);
+		n = n >> 1;
+	}
+	curnbits += nbits;
+	cleanbuffer();
+	//fprintf(file, "%c\n", reverse((char) ((n << 24) >> 24)) );
+}
+
+char reverse(char b) {
+   b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+   b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+   b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+   return b;
+}
+
+void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int ncolors){
+	int imgpos=0;
+	char c;
+	fillDict(ncolors);
+
+	printf("ncolors: %d\n", ncolors);
+	writeBits(ncolors+1, numBits(dict.size()) );
+
+	string s = string(1, pixels[imgpos++]);
+	while(imgpos < npixels){
+		c = pixels[imgpos++];
+		if(inDict(s + c)){
+			s += c;
+		}else{
+			printf("size: %d\n", dict.size());
+			writeBits(dict[s], numBits(dict.size()) );
+			string s2 = s+c;
+			dict[s2] = (int)dict.size();
+			for(int o=0; o < s2.size(); o++)
+				printf("%d ", s2[o]);
+			cout << endl;
+			s = string(1, c);
+		}
+		if(dict.size() == 4096){
+			printf("CLEAR DICT\n");
+			writeBits(ncolors+1, numBits(dict.size()) );
+			dict.clear();
+			fillDict(ncolors);
+		}
+
+	}
+	for(int i=0; i<ncodes; i++){
+		printf("%d\n", reverse(towrite[i]));
+	}
+
 }
 
 //---- Função para escrever imagem no formato GIF, versão 87a
@@ -158,7 +239,8 @@ void GIFEncoderWrite(imageStruct* image, char* outputFile) {
 	//Sugest‹o de assinatura do mŽtodo a chamar:
 	//
 	// LZWCompress(file, image->minCodeSize, image->pixels, image->width*image->height);
-	
+	printf("w:%d h:%d\n", image->width, image->height);
+	LZWCompress(file, image->minCodeSize, image->pixels, image->width*image->height, image->numColors);
 	
 	fprintf(file, "%c", (char)0);
 	
@@ -178,7 +260,7 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
 	char toWrite, GCTF, colorRes, SF, sz, bgci, par;
 
 	//Assinatura e versão (GIF87a)
-	char* s = "GIF87a";
+	char s[] = "GIF87a";
 	for (i = 0; i < (int)strlen(s); i++)
 		fprintf(file, "%c", s[i]);
 

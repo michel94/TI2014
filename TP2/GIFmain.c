@@ -15,12 +15,12 @@ int main(int argc, char *argv[]) {
 	if (argc > 1)
 		inputFile = argv[1];
 	else
-		inputFile = "samples/portugal.png";
+		inputFile = const_cast<char *>("samples/monica.png");
 
 	if (argc > 2)
 		outputFile = argv[2];
 	else
-		outputFile = "portugalOutput.gif";
+		outputFile = const_cast<char *>("monicaOutput.gif");
 	
 	printf("Loading file %s\n", inputFile);
 	printf("Writing to file %s\n", outputFile);

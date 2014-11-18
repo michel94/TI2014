@@ -1,2 +1,2 @@
-gcc -c GIFencoder.c
-gcc GIFmain.c GIFencoder.o -o GIFmain -lm
+g++ -c GIFencoder.c
+g++ GIFmain.c GIFencoder.o -o GIFmain -lm
