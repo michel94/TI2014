@@ -1,3 +1,4 @@
+
 #include "GIFencoder.h"
 
 #include "math.h"

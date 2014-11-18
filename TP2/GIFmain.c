@@ -1,3 +1,4 @@
+
 #define STBI_FAILURE_USERMSG true
 
 #include "stb_image.c"
@@ -42,3 +43,4 @@ int main(int argc, char *argv[]) {
 
 	return 0;
 }
+
