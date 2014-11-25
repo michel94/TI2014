@@ -126,7 +126,7 @@ int printBytes(int a, int n, FILE* file){
 }
 
 void writeImageBlockHeader(imageStruct* image, FILE* file){
-	fprintf(file, "%c", 2*16 + 12); //0x2c
+	fprintf(file, "%c", (2 << 4) + 12); //0x2c
 	fprintf(file, "%c%c", 0, 0); //image left position - 2 bytes
 	fprintf(file, "%c%c", 0, 0); //image top position - 2 bytes
 
@@ -196,8 +196,6 @@ void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int nco
 	writeBits(255, 8, file); //sub-block size
 	writeBits(CLEARCODE, (int)numBits(dict.size() - 1), file);  //clearcode
 
-	cout << "sdasdasda" << npixels << endl;
-
 	string s = string(1, pixels[imgpos++]);
 	while(imgpos < npixels){
 
@@ -224,12 +222,17 @@ void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int nco
 	writeBits(ENDOFINF, (int)numBits(dict.size() - 1), file);
 
 	//escrever o byte que está em buffer
-	if(bit_position != 0)
-		fprintf(file, "%c", towrite[ncodes]);
+	//if(bit_position != 0)
+		
+		//writeBits(ENDOFINF, (int)numBits(dict.size() - 1), file);
+		
+		//fprintf(file, "%c", towrite[ncodes]);
 
+
+	printf("towrite %d\n", towrite[ncodes - ncodes % 256]);
 	towrite[ncodes - ncodes % 256] = ncodes % 256;
 
-	for(int i = 0; i < ncodes; i++){
+	for(int i = ncodes - ncodes % 256; i < ncodes; i++){
 		fprintf(file, "%c", towrite[i]);
 	}
 }
