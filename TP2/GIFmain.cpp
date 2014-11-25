@@ -18,10 +18,23 @@ int main(int argc, char *argv[]) {
 	else
 		inputFile = const_cast<char *>("samples/monica.png");
 
-	if (argc > 2)
+	if (argc > 2){
 		outputFile = argv[2];
-	else
-		outputFile = const_cast<char *>("monicaOutput.gif");
+		for(int i=strlen(outputFile)-1; i>=0; i--){
+			if(outputFile[i] == '.'){
+				outputFile[i+1] = 'g';
+				outputFile[i+2] = 'i';
+				outputFile[i+1] = 'f';
+				outputFile[i+1] = 0;
+				printf("%s\n", outputFile);
+				break;
+			}
+		}
+	}else{
+		outputFile = const_cast<char *>(inputFile);
+	}
+
+}
 	
 	printf("Loading file %s\n", inputFile);
 	printf("Writing to file %s\n", outputFile);
