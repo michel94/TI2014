@@ -241,7 +241,7 @@ void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int nco
 void GIFEncoderWrite(imageStruct* image, char* outputFile) {
 
 	FILE* file = fopen(outputFile, "wb");
-	char trailer, terminator, eoi;
+	char trailer, terminator;
 
 	writeGIFHeader(image, file);
 	writeImageBlockHeader(image, file);
