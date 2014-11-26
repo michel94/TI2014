@@ -1,4 +1,5 @@
 #include "GIFencoder.hpp"
+#include <string.h>
 
 using namespace std;
 
