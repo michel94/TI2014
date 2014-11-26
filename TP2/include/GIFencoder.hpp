@@ -1,24 +1,25 @@
-#ifndef _GIFENCODER_H_
-#define _GIFENCODER_H_
+#ifndef GIFENCODER_HEADER
+#define GIFENCODER_HEADER
 
 #define MAX_COLORS 256
-#include "stdio.h"
-#include <map>
-#include <string>
+
+#include <stdio.h>
 #include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <cmath>
+#include <map>
 
 using namespace std;
 
 typedef struct _imageStruct {
-	int width;
-	int height;
-	char *pixels;
-	char *colors;
-	int numColors;
-	char minCodeSize;
+  int width;
+  int height;
+  char *pixels;
+  char *colors;
+  int numColors;
+  char minCodeSize;
 } imageStruct;
-
-//
 
 imageStruct* GIFEncoder(unsigned char *data, int width, int height);
 void RGB2Indexed(unsigned char *data, imageStruct* image);
