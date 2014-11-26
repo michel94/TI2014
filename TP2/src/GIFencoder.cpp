@@ -4,7 +4,7 @@
 using namespace std;
 
 map<string, int> dict;
-int ncodes=0, bit_position = 0;
+int ncodes = 0, bit_position = 0;
 char towrite[1000000];
 int CLEARCODE, ENDOFINF;
 
@@ -28,7 +28,6 @@ void RGB2Indexed(unsigned char *data, imageStruct* image) {
 
   image->pixels = (char*)calloc(image->width*image->height, sizeof(char));
   image->colors = (char*)calloc(MAX_COLORS * 3, sizeof(char));
-
 
   for (x = 0; x < image->width; x++) {
     for (y = 0; y < image->height; y++) {
