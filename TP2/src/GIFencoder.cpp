@@ -59,14 +59,14 @@ void RGB2Indexed(unsigned char *data, imageStruct* image) {
   //define o numero de cores como potencia de 2 (devido aos requistos da Global Color Table)
   image->numColors = nextPower2(colorNum);
 
-  //refine o array de cores com base no n�mero final obtido
+  //refine o array de cores com base no numero final obtido
   copy = (char*)calloc(image->numColors*3, sizeof(char));
   memset(copy, 0, sizeof(char)*image->numColors*3);
   memcpy(copy, image->colors, sizeof(char)*colorNum*3);
   image->colors = copy;
 
   image->minCodeSize = numBits(image->numColors - 1);
-  if (image->minCodeSize == (char)1)  //imagens bin�rias --> caso especial (p�g. 26 do RFC)
+  if (image->minCodeSize == (char)1)  //imagens binarias --> caso especial (pag. 26 do RFC)
     image->minCodeSize++;
 }
 
@@ -260,12 +260,12 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
   int i;
   char toWrite, GCTF, colorRes, SF, sz, bgci, par;
 
-  //Assinatura e vers�o (GIF87a)
+  //Assinatura e versao (GIF87a)
   char s[] = "GIF87a";
   for (i = 0; i < (int)strlen(s); i++)
     fprintf(file, "%c", s[i]);
 
-  //Ecr� l�gico (igual � da dimens�o da imagem) --> primeiro o LSB e depois o MSB
+  //Ecra logico (igual a da dimensao da imagem) --> primeiro o LSB e depois o MSB
   fprintf(file, "%c", (char)( image->width & 0xFF));
   fprintf(file, "%c", (char)((image->width >> 8) & 0xFF));
   fprintf(file, "%c", (char)( image->height & 0xFF));
@@ -273,7 +273,7 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
 
   //GCTF, Color Res, SF, size of GCT
   GCTF = 1;
-  colorRes = 7;  //n�mero de bits por cor prim�ria (-1)
+  colorRes = 7;  //numero de bits por cor primaria (-1)
   SF = 0;
   sz = numBits(image->numColors - 1) - 1; //-1: 0 --> 2^1, 7 --> 2^8
   toWrite = (char) (GCTF << 7 | colorRes << 4 | SF << 3 | sz);
@@ -284,7 +284,7 @@ void writeGIFHeader(imageStruct* image, FILE* file) {
   fprintf(file, "%c", bgci);
 
   //Pixel aspect ratio
-  par = 0; // 0 --> informa��o sobre aspect ratio n�o fornecida --> decoder usa valores por omiss�o
+  par = 0; // 0 --> informacao sobre aspect ratio nao fornecida --> decoder usa valores por omissao
   fprintf(file, "%c",par);
 
   //Global color table
