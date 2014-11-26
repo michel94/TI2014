@@ -83,8 +83,9 @@ int nextPower2(int n) {
     n /= 2;
   }
 
-  if (ret % nIni == 0)
+  if (ret % nIni == 0) {
     ret = nIni;
+  }
 
   return ret;
 }
@@ -94,8 +95,9 @@ int nextPower2(int n) {
 char numBits(int n) {
   char nb = 0;
 
-  if (n == 0)
+  if (n == 0) {
     return 0;
+  }
 
   while (n != 0) {
     nb++;
@@ -141,8 +143,9 @@ void writeImageBlockHeader(imageStruct* image, FILE* file) {
   fprintf(file, "%c", numBits(image->numColors - 1));
 }
 
+/* Preenche o dicionario */
 void fillDict(int ncolors) {
-  for(int i = 0; i < ncolors; i++) {
+  for (int i = 0; i < ncolors; i++) {
     string s(1, i);
     dict[s] = i;
   }
@@ -154,11 +157,12 @@ void fillDict(int ncolors) {
   dict[string(1, ENDOFINF)] = ENDOFINF;
 }
 
+/* Se a string 's' esta no dicionario */
 bool inDict(string s) {
   return dict.find(s) != dict.end();
 }
 
-void writeBits(int n, int nbits,  FILE* file) {
+void writeBits(int n, int nbits, FILE* file) {
   int bit;
 
   for (int i = 0; i < nbits; i++, n = n >> 1) {
