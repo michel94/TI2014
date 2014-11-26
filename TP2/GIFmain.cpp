@@ -20,21 +20,21 @@ int main(int argc, char *argv[]) {
 
 	if (argc > 2){
 		outputFile = argv[2];
-		for(int i=strlen(outputFile)-1; i>=0; i--){
-			if(outputFile[i] == '.'){
-				outputFile[i+1] = 'g';
-				outputFile[i+2] = 'i';
-				outputFile[i+1] = 'f';
-				outputFile[i+1] = 0;
-				printf("%s\n", outputFile);
-				break;
-			}
-		}
+		
 	}else{
-		outputFile = const_cast<char *>(inputFile);
+		outputFile = const_cast<char *>("monicaOutput.gif");
 	}
-
-}
+	/*for(int i=strlen(outputFile)-1; i>=0; i--){
+		printf("%d\n", i);
+		if(outputFile[i] == '.'){
+			outputFile[i+1] = 'g';
+			outputFile[i+2] = 'i';
+			outputFile[i+3] = 'f';
+			outputFile[i+4] = 0;
+			printf("%s\n", outputFile);
+			break;
+		}
+	}*/
 	
 	printf("Loading file %s\n", inputFile);
 	printf("Writing to file %s\n", outputFile);
