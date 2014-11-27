@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
   if (argc > 2) {
     outputFile = argv[2];
   } else {
-    outputFile = const_cast<char *>("monicaOutput.gif");
+    outputFile = const_cast<char *>("output.gif");
   }
 
   printf("Loading file %s\n", inputFile);
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
   data = stbi_load(inputFile, &width, &height, &numComponents, STBI_rgb);
 
   if (!data && stbi_failure_reason()) {
-    printf("Error: %s\n",stbi_failure_reason());
+    printf("Error: %s\n", stbi_failure_reason());
     return 1;
   }
 

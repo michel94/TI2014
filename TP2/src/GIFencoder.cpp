@@ -10,7 +10,6 @@ int CLEARCODE, ENDOFINF;
 
 // conversao de um objecto do tipo Image numa imagem indexada
 imageStruct* GIFEncoder(unsigned char *data, int width, int height) {
-
   imageStruct* image = (imageStruct*)malloc(sizeof(imageStruct));
   image->width = width;
   image->height = height;

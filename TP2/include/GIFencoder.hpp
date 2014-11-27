@@ -10,6 +10,7 @@
 #include <string>
 #include <cmath>
 #include <map>
+#include <string.h>
 
 using namespace std;
 
