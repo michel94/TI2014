@@ -105,20 +105,6 @@ char numBits(int n) {
   return nb;
 }
 
-int printBytes(int a, int n, FILE* file) {
-  if (n < 0 || n > 4) {
-    return 1;
-  }
-
-  int i;
-  for (i = 0; i < n; i++) {
-    fprintf(file, "%d\n", (a << 24) >> 24);
-    a = a >> 8;
-  }
-
-  return 0;
-}
-
 void writeImageBlockHeader(imageStruct* image, FILE* file) {
   fprintf(file, "%c", (2 << 4) + 12); //0x2c
   fprintf(file, "%c%c", 0, 0); //image left position - 2 bytes
