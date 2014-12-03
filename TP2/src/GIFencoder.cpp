@@ -146,6 +146,8 @@ bool inDict(string s) {
   return dict.find(s) != dict.end();
 }
 
+// imprimir o numero 'n' em 'nbits' no ficheiro 'file'
+// 'nbits' e o numero maximo de bits necessarios para escrever um dado numero dos codigos do dicionario
 void writeBits(int n, int nbits, FILE* file) {
   int bit;
 
@@ -156,14 +158,14 @@ void writeBits(int n, int nbits, FILE* file) {
 
     bit_position++;
 
-    if (bit_position == 8) {
+    if (bit_position == 8) { // a cada 8 bits escreve 1 byte no ficheiro
       printf("%d\n", towrite[ncodes]);
-      fprintf(file, "%c", towrite[ncodes]);
+      //fprintf(file, "%c", towrite[ncodes]);
 
       ncodes++;
       bit_position = 0;
 
-      if (ncodes % 256 == 0) {
+      if (ncodes % 256 == 0) { // se escrevemos agora 256 entradas, escrever sub-block size
         writeBits(255, 8, file);
       }
     }
@@ -180,19 +182,19 @@ void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int nco
   writeBits(255, 8, file); //sub-block size
   writeBits(CLEARCODE, (int) numBits(dict.size() - 1), file);  //clearcode
 
-  string s = string(1, pixels[imgpos++]);
+  string s = string(1, pixels[imgpos++]); // P
   while (imgpos < npixels) {
-    c = pixels[imgpos++];
+    c = pixels[imgpos++]; // C
 
     if (inDict(s + c)) {
       s += c;
     } else {
-      writeBits(dict[s], (int) numBits(dict.size() - 1), file);
+      writeBits(dict[s], (int) numBits(dict.size() - 1), file); // escreve so o S
       dict[s+c] = (int) dict.size() - 1;
-      s = string(1, c);
+      s = string(1, c); // inicialize uma string de C++ com apenas um caracter que e a variavel c
     }
 
-    if (dict.size() == 4096) {
+    if (dict.size() == 4096) { // 256 bytes
       printf("CLEAR DICT\n");
       writeBits(CLEARCODE, numBits(dict.size() - 1), file);
       dict.clear();
@@ -213,7 +215,7 @@ void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int nco
   printf("towrite %d\n", towrite[ncodes - ncodes % 256]);
   towrite[ncodes - ncodes % 256] = ncodes % 256;
 
-  for(int i = ncodes - ncodes % 256; i < ncodes; i++){
+  for (int i = 0; i < ncodes; i++){
     fprintf(file, "%c", towrite[i]);
   }
 }
