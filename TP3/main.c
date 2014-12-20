@@ -1,16 +1,15 @@
 int unDES (char* inFileName, unsigned long long key);
 int DES (char* inFileName, unsigned long long key);
 
-//função principal, a qual gere todo o processo de encriptação e decriptação
-int main(void)
-{
+//funÃ§Ã£o principal, a qual gere todo o processo de encriptaÃ§Ã£o e decriptaÃ§Ã£o
+int main(void) {
   int erro;
   unsigned long long key;
 
   char fileName1[] = "FAQ.txt.gz";
   char fileName2[] = "FAQ.txt.gz.DES";
 
-  //encriptação
+  //encriptaÃ§Ã£o
   key = 0x0123456789ABCDEF;
   erro = DES(fileName1, key);
 
@@ -18,7 +17,7 @@ int main(void)
     return erro;
   }
 
-  //decriptação
+  //decriptaÃ§Ã£o
   erro = unDES(fileName2, key);
 
   return erro;
