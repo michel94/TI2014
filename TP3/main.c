@@ -13,11 +13,13 @@ int main(void)
   //encriptação
   key = 0x0123456789ABCDEF;
   erro = DES(fileName1, key);
-  if (erro != 0)
+
+  if (erro != 0) {
     return erro;
+  }
 
   //decriptação
   erro = unDES(fileName2, key);
-  
+
   return erro;
 }
