@@ -163,7 +163,7 @@ void writeBits(int n, int nbits, FILE* file) {
       //fprintf(file, "%c", towrite[ncodes]);
 
       ncodes++;
-      bit_position = 0;
+      bit_position = 0; // reiniciar posicao do bit
 
       if (ncodes % 256 == 0) { // se escrevemos agora 256 entradas, escrever sub-block size
         writeBits(255, 8, file);
@@ -215,7 +215,7 @@ void LZWCompress(FILE* file, int minCodeSize, char* pixels, int npixels, int nco
   printf("towrite %d\n", towrite[ncodes - ncodes % 256]);
   towrite[ncodes - ncodes % 256] = ncodes % 256;
 
-  for (int i = 0; i < ncodes; i++){
+  for (int i = 0; i < ncodes; i++) {
     fprintf(file, "%c", towrite[i]);
   }
 }
