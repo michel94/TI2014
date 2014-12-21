@@ -223,15 +223,6 @@ void DESKeySchedule(unsigned long long key, unsigned long long* subKeys) {
   }
 }
 
-// função para criação de de uma hash a partir dos dados do ficheiro,
-// usando MDC-4
-unsigned char* signature(unsigned char* inByteArray, long dim,
-                         unsigned long long key);
-
-//função para verificação da assinatura: verificar se a hash criada a
-// partir dos dados é igual à hash recebida
-int checkSignature(unsigned char* inByteArray, unsigned char* hash);
-
 unsigned long long int initPermutation(unsigned long long int input) {
   return permBase(input, 64, IP, 64);
 }
@@ -244,7 +235,7 @@ unsigned long long int expansion(unsigned long int input) {
   return permBase(input, 32, E, 48);
 }
 
-unsigned long int permutation(unsigned long int input) {
+unsigned long int permutationP(unsigned long int input) {
   return permBase(input, 32, P, 32);
 }
 
@@ -276,21 +267,21 @@ unsigned long int substitution(unsigned long long int input) {
 
 unsigned long long encryptDESplain(unsigned long long plain,
                                    unsigned long long* subKeys) {
-  plain = initPermutation(plain);
+  plain = initPermutation(plain); // permutacao inicial
 
-  unsigned long int left = plain >> 32;
-  unsigned long int right = plain << 32 >> 32;
+  unsigned long int left = plain >> 32; // obter L0
+  unsigned long int right = plain << 32 >> 32; // obter R0
   unsigned long int newLeft, newRight;
   unsigned long long int temp;
 
   int i;
-  for (i = 0; i < 16; i++) {
-    temp = expansion(right);
+  for (i = 0; i < 16; i++) { // ir subchave a subchave
+    temp = expansion(right); // tabela E
 
     temp ^= subKeys[i];
 
     temp = substitution(temp);
-    temp = permutation(temp);
+    temp = permutationP(temp); // substituicoes
 
     newRight = temp ^ left;
     newLeft = right;
@@ -300,7 +291,8 @@ unsigned long long encryptDESplain(unsigned long long plain,
   }
 
   plain = (right << 32) | left;
-  plain = finalPermutation(plain);
+
+  plain = finalPermutation(plain); // permutacao final
 
   printf("res-> %llx\n", plain);
 
